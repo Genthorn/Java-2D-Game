@@ -5,13 +5,13 @@ import com.zormion.game.audio.Sound;
 import com.zormion.game.gfx.Colors;
 import com.zormion.game.gfx.Font;
 import com.zormion.game.gfx.Screen;
-import com.zormion.game.input.InputHandler;
+import com.zormion.game.input.Keyboard;
 import com.zormion.game.level.Level;
 import com.zormion.game.net.packets.Packet02Move;
 
 public class Player extends Mob {
 	
-	private InputHandler input;
+	private Keyboard input;
 	private int color = Colors.get(-1, 111, 145, 543);
 	public boolean isSwimming = false;
 	private int updateCount = 0;
@@ -19,7 +19,7 @@ public class Player extends Mob {
 	private Sound walkingSound;
 	private int healthMax = 50, manaMax = 50;
 	
-	public Player(String username, Level level, int x, int y, InputHandler input) {
+	public Player(String username, Level level, int x, int y, Keyboard input) {
 		super(level, "Player", x, y, 1);
 		this.input = input;
 		this.x = x;

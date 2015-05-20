@@ -21,7 +21,7 @@ import com.zormion.game.gfx.Colors;
 import com.zormion.game.gfx.Font;
 import com.zormion.game.gfx.Screen;
 import com.zormion.game.gfx.Spritesheet;
-import com.zormion.game.input.InputHandler;
+import com.zormion.game.input.Keyboard;
 import com.zormion.game.level.Level;
 import com.zormion.game.net.GameClient;
 import com.zormion.game.net.GameServer;
@@ -45,7 +45,7 @@ public class Game extends Canvas implements Runnable {
 	private GameState gameState;
 	private StateManager stateManager;
 	
-	private InputHandler input;
+	private Keyboard input;
 	private WindowHandler windowHandler;
 	private Level level;
 	private Player player;
@@ -119,7 +119,7 @@ public class Game extends Canvas implements Runnable {
 		
 		game = this;
 		screen = new Screen(WIDTH, HEIGHT, new Spritesheet("res/spritesheet.png"));
-		input = new InputHandler(this);
+		input = new Keyboard(this);
 		windowHandler = new WindowHandler(this);
 		level = new Level("res/levels/world1.png");
 		player = new PlayerMP(JOptionPane.showInputDialog(this, "Enter Username"), level, 200, 200, input, null, -1);
@@ -253,7 +253,7 @@ public class Game extends Canvas implements Runnable {
 		return level;
 	}
 	
-	public InputHandler getInput() {
+	public Keyboard getInput() {
 		return input;
 	}
 	

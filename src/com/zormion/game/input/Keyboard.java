@@ -7,9 +7,9 @@ import java.util.List;
 
 import com.zormion.game.Game;
 
-public class InputHandler implements KeyListener {
+public class Keyboard implements KeyListener {
 	
-	public InputHandler(Game game) {
+	public Keyboard(Game game) {
 		game.requestFocus();
 		game.addKeyListener(this);
 	}
