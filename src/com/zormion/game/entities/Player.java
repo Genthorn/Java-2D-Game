@@ -12,7 +12,7 @@ import com.zormion.game.net.packets.Packet02Move;
 public class Player extends Mob {
 
     private Keyboard input;
-    private int colour = Colors.get(-1, 111, 145, 543);
+    private int colour = Colors.get(-1, 111, 123, 234);
     private int scale = 1;
     protected boolean isSwimming = false;
     private int tickCount = 0;

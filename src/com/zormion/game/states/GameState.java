@@ -3,9 +3,9 @@ package com.zormion.game.states;
 import com.zormion.game.gfx.Screen;
 
 public class GameState extends State {
-
+	
 	public GameState(String name) {
-		super(name);
+		super();
 	}
 
 	public void init() {

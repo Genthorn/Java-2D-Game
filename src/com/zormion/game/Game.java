@@ -15,7 +15,6 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import com.zormion.game.entities.Blob;
 import com.zormion.game.entities.Player;
 import com.zormion.game.entities.PlayerMP;
 import com.zormion.game.gfx.Colors;
@@ -29,14 +28,13 @@ import com.zormion.game.net.GameServer;
 import com.zormion.game.net.packets.Packet00Login;
 import com.zormion.game.states.GameState;
 import com.zormion.game.states.State;
-import com.zormion.game.states.StateManager;
 
 public class Game extends Canvas implements Runnable {
 
     private static final long serialVersionUID = 1L;
 
-    public static final int WIDTH = 160;
-    public static final int HEIGHT = WIDTH / 12 * 9;
+    public static final int WIDTH = 300;
+    public static final int HEIGHT = WIDTH / 16 * 9;
     public static final int SCALE = 3;
     public static final String NAME = "Game";
     public static final Dimension DIMENSIONS = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
@@ -65,6 +63,9 @@ public class Game extends Canvas implements Runnable {
     public boolean debug = false;
     public boolean isApplet = false;
     
+    private int frames;
+    private int updates;
+    
     public Game() {
     	setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
@@ -73,6 +74,8 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame(NAME);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.requestFocus();
+		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//frame.setUndecorated(true);
 		frame.setLayout(new BorderLayout());
 		frame.add(this, BorderLayout.CENTER);
 		frame.pack();
@@ -108,9 +111,6 @@ public class Game extends Canvas implements Runnable {
             }
             loginPacket.writeData(socketClient);
         }
-        
-        System.out.println("You are playing as: " + player.getUsername());
-        
     }
 
     public synchronized void start() {
@@ -143,9 +143,6 @@ public class Game extends Canvas implements Runnable {
         long lastTime = System.nanoTime();
         double nsPerTick = 1000000000D / 60D;
 
-        int ticks = 0;
-        int frames = 0;
-
         long lastTimer = System.currentTimeMillis();
         double delta = 0;
 
@@ -158,7 +155,7 @@ public class Game extends Canvas implements Runnable {
             boolean shouldRender = true;
 
             while (delta >= 1) {
-                ticks++;
+                updates++;
                 update();
                 delta -= 1;
                 shouldRender = true;
@@ -174,12 +171,13 @@ public class Game extends Canvas implements Runnable {
                 frames++;
                 render();
             }
-
+            
             if (System.currentTimeMillis() - lastTimer >= 1000) {
                 lastTimer += 1000;
-                debug(DebugLevel.INFO, ticks + " ticks, " + frames + " frames");
+                debug(DebugLevel.INFO, updates + " ticks, " + frames + " frames");
+                
                 frames = 0;
-                ticks = 0;
+                updates = 0;
             }
         }
     }
@@ -201,7 +199,7 @@ public class Game extends Canvas implements Runnable {
 
         level.renderTiles(screen, xOffset, yOffset);
         level.renderEntities(screen);
-
+        
         for (int y = 0; y < screen.height; y++) {
             for (int x = 0; x < screen.width; x++) {
                 int colourCode = screen.pixels[x + y * screen.width];
@@ -215,7 +213,7 @@ public class Game extends Canvas implements Runnable {
         g.dispose();
         bs.show();
     }
-
+    
     public static long fact(int n) {
         if (n <= 1) {
             return 1;

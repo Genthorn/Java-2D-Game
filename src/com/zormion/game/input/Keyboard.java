@@ -50,7 +50,7 @@ public class Keyboard implements KeyListener {
 	public void keyTyped(KeyEvent e) {
 	}
 	
-	public void toggleKey(int keyCode, boolean isPressed) {
+	private void toggleKey(int keyCode, boolean isPressed) {
 		if(keyCode == KeyEvent.VK_W) up.toggle(isPressed);
 		if(keyCode == KeyEvent.VK_A) left.toggle(isPressed);
 		if(keyCode == KeyEvent.VK_S) down.toggle(isPressed);
