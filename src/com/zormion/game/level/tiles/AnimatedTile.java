@@ -23,7 +23,6 @@ public class AnimatedTile extends BasicTile {
     public void update() {
     	
     	if(index == 1) 
-    		System.out.println("Water");
     		index++;
     	
         if ((System.currentTimeMillis() - lastIterationTime) >= (animationSwitchDelay)) {
