@@ -40,6 +40,7 @@ public class GameServer extends Thread {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            
             this.parsePacket(packet.getData(), packet.getAddress(), packet.getPort());
         }
     }
@@ -56,7 +57,7 @@ public class GameServer extends Thread {
             packet = new Packet00Login(data);
             System.out.println("[" + address.getHostAddress() + ":" + port + "] "
                     + ((Packet00Login) packet).getUsername() + " has connected...");
-            PlayerMP player = new PlayerMP(((Packet00Login) packet).getUsername(), game.getLevel(), 100, 100, address, port);
+            PlayerMP player = new PlayerMP(((Packet00Login) packet).getUsername(), game.level, 100, 100, address, port);
             this.addConnection(player, (Packet00Login) packet);
             break;
         case DISCONNECT:
@@ -73,6 +74,7 @@ public class GameServer extends Thread {
 
     public void addConnection(PlayerMP player, Packet00Login packet) {
         boolean alreadyConnected = false;
+        
         for (PlayerMP p : this.connectedPlayers) {
             if (player.getUsername().equalsIgnoreCase(p.getUsername())) {
                 if (p.ipAddress == null) {
@@ -83,15 +85,19 @@ public class GameServer extends Thread {
                 }
                 alreadyConnected = true;
             } else {
+            	
+                // relay to the currently connected players that there is a new player
                 sendData(packet.getData(), p.ipAddress, p.port);
 
-                packet = new Packet00Login(p.getUsername(), p.x, p.y);
-                sendData(packet.getData(), player.ipAddress, player.port);
+                // relay to the new player that the currently connected players exists
+                Packet00Login packetCurrentPlayer = new Packet00Login(p.getUsername(), p.x, p.y);
+                sendData(packetCurrentPlayer.getData(), player.ipAddress, player.port);
             }
         }
         
+        
         if (!alreadyConnected) {
-            this.connectedPlayers.add(player);
+        	this.connectedPlayers.add(player);
         }
     }
 
@@ -121,13 +127,15 @@ public class GameServer extends Thread {
     }
 
     public void sendData(byte[] data, InetAddress ipAddress, int port) {
-        DatagramPacket packet = new DatagramPacket(data, data.length, ipAddress, port);
+        if (!game.isApplet) {
+
+            DatagramPacket packet = new DatagramPacket(data, data.length, ipAddress, port);
             try {
                 this.socket.send(packet);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        
+        }
     }
 
     public void sendDataToAllClients(byte[] data) {
@@ -142,10 +150,11 @@ public class GameServer extends Thread {
             PlayerMP player = this.connectedPlayers.get(index);
             player.x = packet.getX();
             player.y = packet.getY();
-            /*player.setMoving(packet.isMoving());
+            player.setMoving(packet.isMoving());
             player.setMovingDir(packet.getMovingDir());
-            player.setNumSteps(packet.getNumSteps());*/
+            player.setNumSteps(packet.getNumSteps());
             packet.writeData(this);
         }
     }
+
 }
