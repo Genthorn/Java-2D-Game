@@ -66,12 +66,20 @@ public class Game extends Canvas implements Runnable {
     private int frames;
     private int updates;
     
+     /*TODO
+  * ---------
+  * Remove color system
+  * 
+  *
+  */
+    
     public Game() {
     	setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		
 		frame = new JFrame(NAME);
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.requestFocus();
 		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
