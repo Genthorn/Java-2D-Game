@@ -13,7 +13,7 @@ public abstract class Tile {
 	public static final Tile FLOWER = new BasicTile(4, 3, 0, 0xffFFD800);
 	public static final Tile WATER = new AnimatedTile(3, new int[][] { { 0, 4 }, { 1, 4 }, { 2, 4 }, { 1, 4 } }, 0xFF0026FF, 1000);
 	
-	//public static final Tile WATERBORDER00 =  new BasicTile(5, 5, 0);
+	//public static final Tile WATERBORDER00 =  new BasicTile(5, 5, 0, );
 	
 	protected byte tileID;
     protected boolean solid;

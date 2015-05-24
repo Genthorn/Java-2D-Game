@@ -67,10 +67,9 @@ public class Game extends Canvas implements Runnable {
     
      /*TODO
   * ---------
-  * Remove color system
-  * 1  Separate server from game
-  * 	2. Save Player data
-  * 
+  * -Do Player in Water Bobbing
+  * -Save Player data on server
+  * -Work on map editor tool
   *
   */
     
