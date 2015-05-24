@@ -9,10 +9,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import com.zormion.game.entities.Entity;
-import com.zormion.game.entities.Entity;
-import com.zormion.game.entities.Player;
 import com.zormion.game.entities.PlayerMP;
-import com.zormion.game.gfx.Colors;
 import com.zormion.game.gfx.Screen;
 import com.zormion.game.level.tiles.Tile;
 

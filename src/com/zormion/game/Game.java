@@ -2,23 +2,17 @@ package com.zormion.game;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import com.zormion.game.entities.Player;
 import com.zormion.game.entities.PlayerMP;
-import com.zormion.game.gfx.Colors;
-import com.zormion.game.gfx.Font;
 import com.zormion.game.gfx.Screen;
 import com.zormion.game.gfx.Spritesheet;
 import com.zormion.game.input.Keyboard;
@@ -26,8 +20,6 @@ import com.zormion.game.level.Level;
 import com.zormion.game.net.GameClient;
 import com.zormion.game.net.GameServer;
 import com.zormion.game.net.packets.Packet00Login;
-import com.zormion.game.states.GameState;
-import com.zormion.game.states.State;
 
 public class Game extends Canvas implements Runnable {
 

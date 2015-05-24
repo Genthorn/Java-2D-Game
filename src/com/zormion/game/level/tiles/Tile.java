@@ -1,6 +1,5 @@
 package com.zormion.game.level.tiles;
 
-import com.zormion.game.gfx.Colors;
 import com.zormion.game.gfx.Screen;
 import com.zormion.game.level.Level;
 

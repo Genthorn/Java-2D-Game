@@ -1,8 +1,6 @@
 package com.zormion.game.entities;
 
 import com.zormion.game.Game;
-import com.zormion.game.audio.Sound;
-import com.zormion.game.gfx.Colors;
 import com.zormion.game.gfx.Font;
 import com.zormion.game.gfx.Screen;
 import com.zormion.game.input.Keyboard;
