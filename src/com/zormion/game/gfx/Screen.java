@@ -27,7 +27,7 @@ public class Screen {
 
 	}
 
-	public void render(int xPos, int yPos, int tile, int colour, int mirrorDir, int scale) {
+	public void render(int xPos, int yPos, int tile, int mirrorDir, int scale) {
         xPos -= xOffset;
         yPos -= yOffset;
 
@@ -50,7 +50,7 @@ public class Screen {
                 if (mirrorX)
                     xSheet = 7 - x;
                 int xPixel = x + xPos + (x * scaleMap) - ((scaleMap << 3) / 2);
-                int col = (colour >> (sheet.getPixels()[xSheet + ySheet * sheet.getWidth() + tileOffset] * 8)) & 255;
+                int col = (sheet.getPixels()[xSheet + ySheet * sheet.getWidth() + tileOffset]);
                 if (col < 255) {
                     for (int yScale = 0; yScale < scale; yScale++) {
                         if (yPixel + yScale < 0 || yPixel + yScale >= height)
@@ -58,7 +58,7 @@ public class Screen {
                         for (int xScale = 0; xScale < scale; xScale++) {
                             if (xPixel + xScale < 0 || xPixel + xScale >= width)
                                 continue;
-                            pixels[(xPixel + xScale) + (yPixel + yScale) * width] = col;
+                            if(col != 0xff000000) pixels[(xPixel + xScale) + (yPixel + yScale) * width] = col;
                         }
                     }
                 }

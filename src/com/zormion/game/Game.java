@@ -49,8 +49,7 @@ public class Game extends Canvas implements Runnable {
 
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-    private int[] colors = new int[6 * 6 * 6];
-
+    
     private Screen screen;
     public Keyboard input;
     public WindowHandler windowHandler;
@@ -69,6 +68,8 @@ public class Game extends Canvas implements Runnable {
      /*TODO
   * ---------
   * Remove color system
+  * 1  Separate server from game
+  * 	2. Save Player data
   * 
   *
   */
@@ -94,18 +95,7 @@ public class Game extends Canvas implements Runnable {
 
     public void init() {
         game = this;
-        int index = 0;
-        for (int r = 0; r < 6; r++) {
-            for (int g = 0; g < 6; g++) {
-                for (int b = 0; b < 6; b++) {
-                    int rr = (r * 255 / 5);
-                    int gg = (g * 255 / 5);
-                    int bb = (b * 255 / 5);
 
-                    colors[index++] = rr << 16 | gg << 8 | bb;
-                }
-            }
-        }
         screen = new Screen(WIDTH, HEIGHT, new Spritesheet("res/spritesheet.png"));
         windowHandler = new WindowHandler(this);
         input = new Keyboard(this);
@@ -210,9 +200,9 @@ public class Game extends Canvas implements Runnable {
         
         for (int y = 0; y < screen.height; y++) {
             for (int x = 0; x < screen.width; x++) {
-                int colourCode = screen.pixels[x + y * screen.width];
-                if (colourCode < 255)
-                    pixels[x + y * WIDTH] = colors[colourCode];
+                //int colourCode = screen.pixels[x + y * screen.width];
+                //if (colourCode < 255)
+                    pixels[x + y * WIDTH] = screen.pixels[x+y*screen.width];
             }
         }
 

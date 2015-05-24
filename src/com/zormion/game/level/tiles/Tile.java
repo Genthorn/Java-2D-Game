@@ -7,12 +7,13 @@ import com.zormion.game.level.Level;
 public abstract class Tile {
 	public static final Tile[] tiles = new Tile[256];
 	
-	public static final Tile VOID = new BasicSolidTile(0, 0, 0, Colors.get(000, -1, -1, -1), 0xff000000);
-	public static final Tile STONE = new BasicSolidTile(1, 1, 0, Colors.get(-1, 333, -1, -1), 0xff808080);
-	public static final Tile GRASS = new BasicTile(2, 2, 0, Colors.get(-1, 131, 141, -1), 0xff007F0E);
-	public static final Tile FLOWER = new BasicTile(4, 3, 0, Colors.get(111, 131, 141, 326), 0xffFFD800);
-	public static final Tile WATER = new AnimatedTile(3, new int[][] { { 0, 4 }, { 1, 4 }, { 2, 4 }, { 1, 4 } },
-            Colors.get(-1, 004, 115, -1), 0xFF0026FF, 1000);
+	public static final Tile VOID = new BasicSolidTile(0, 0, 0, 0xff000000);
+	public static final Tile STONE = new BasicSolidTile(1, 1, 0, 0xff808080);
+	public static final Tile GRASS = new BasicTile(2, 2, 0, 0xff007F0E);
+	public static final Tile FLOWER = new BasicTile(4, 3, 0, 0xffFFD800);
+	public static final Tile WATER = new AnimatedTile(3, new int[][] { { 0, 4 }, { 1, 4 }, { 2, 4 }, { 1, 4 } }, 0xFF0026FF, 1000);
+	
+	//public static final Tile WATERBORDER00 =  new BasicTile(5, 5, 0);
 	
 	protected byte tileID;
     protected boolean solid;
