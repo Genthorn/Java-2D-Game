@@ -58,7 +58,7 @@ public class Screen {
                         for (int xScale = 0; xScale < scale; xScale++) {
                             if (xPixel + xScale < 0 || xPixel + xScale >= width)
                                 continue;
-                            if(col != 0xff000000) pixels[(xPixel + xScale) + (yPixel + yScale) * width] = col;
+                            if(col != 0xffff00ff) pixels[(xPixel + xScale) + (yPixel + yScale) * width] = col;
                         }
                     }
                 }
