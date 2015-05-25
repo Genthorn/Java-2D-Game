@@ -2,11 +2,21 @@ package com.zormion.game.level;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.zormion.game.entities.Entity;
 import com.zormion.game.entities.PlayerMP;
@@ -19,12 +29,13 @@ public class Level {
     public int width;
     public int height;
     private List<Entity> entities = new ArrayList<Entity>();
-    private String imagePath;
+    private String levelPath;
+    
     private BufferedImage image;
 
-    public Level(String imagePath) {
-        if (imagePath != null) {
-            this.imagePath = imagePath;
+    public Level(String levelPath) {
+        if (levelPath != null) {
+            this.levelPath = levelPath;
             this.loadLevelFromFile();
         } else {
             this.width = 64;
@@ -36,7 +47,7 @@ public class Level {
 
     private void loadLevelFromFile() {
         try {
-            this.image = ImageIO.read(new File(this.imagePath));
+            this.image = ImageIO.read(new File(this.levelPath));
             this.width = this.image.getWidth();
             this.height = this.image.getHeight();
             tiles = new byte[width * height];
@@ -58,20 +69,6 @@ public class Level {
                 }
             }
         }
-    }
-
-    @SuppressWarnings("unused")
-    private void saveLevelToFile() {
-        try {
-            ImageIO.write(image, "png", new File(Level.class.getResource(this.imagePath).getFile()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void alterTile(int x, int y, Tile newTile) {
-        this.tiles[x + y * width] = newTile.getID();
-        image.setRGB(x, y, newTile.getLevelColor());
     }
 
     public void generateLevel() {

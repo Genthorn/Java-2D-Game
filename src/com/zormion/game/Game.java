@@ -61,7 +61,8 @@ public class Game extends Canvas implements Runnable {
   * ---------
   * -Do Player in Water Bobbing
   * -Save Player data on server
-  * -Work on map editor tool
+  * -Parse Flare Map
+  * -Randomize tile animation
   *
   */
     
