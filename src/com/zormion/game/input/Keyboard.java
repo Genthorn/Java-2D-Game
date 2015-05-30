@@ -38,6 +38,7 @@ public class Keyboard implements KeyListener {
 	public Key down = new Key();
 	public Key left = new Key();
 	public Key right = new Key();
+	public Key escape = new Key();
 
 	public void keyPressed(KeyEvent e) {
 		toggleKey(e.getKeyCode(), true);
@@ -55,6 +56,7 @@ public class Keyboard implements KeyListener {
 		if(keyCode == KeyEvent.VK_A) left.toggle(isPressed);
 		if(keyCode == KeyEvent.VK_S) down.toggle(isPressed);
 		if(keyCode == KeyEvent.VK_D) right.toggle(isPressed);
+		if(keyCode == KeyEvent.VK_ESCAPE) escape.toggle(isPressed);
 	}
 
 }

@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
@@ -88,14 +89,14 @@ public class Level {
     }
 
     public void update() {
+    	
+    	
         for (Entity e : getEntities()) {
             e.update();
         }
 
         for (Tile t : Tile.tiles) {
-            if (t == null) {
-                break;
-            }
+        	if (t == null) break;
             t.update();
         }
     }

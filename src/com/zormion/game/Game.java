@@ -4,10 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.File;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -33,6 +37,7 @@ public class Game extends Canvas implements Runnable {
     public static Game game;
 
     public JFrame frame;
+    private Image iconImage;
 
     private Thread thread;
 
@@ -72,11 +77,13 @@ public class Game extends Canvas implements Runnable {
 		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		
 		frame = new JFrame(NAME);
+		iconImage = new ImageIcon("res/icon.png").getImage();
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.requestFocus();
-		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		//frame.setUndecorated(true);
+		frame.setIconImage(iconImage);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setUndecorated(true);
 		frame.setLayout(new BorderLayout());
 		frame.add(this, BorderLayout.CENTER);
 		frame.pack();
@@ -174,6 +181,8 @@ public class Game extends Canvas implements Runnable {
 
     public void update() {
         updateCount++;
+        if(input.escape.isPressed()) System.exit(-1);
+        
         level.update();
     }
 
