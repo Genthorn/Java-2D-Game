@@ -10,7 +10,6 @@ public class BasicTile extends Tile {
     public BasicTile(int id, int x, int y, int levelColour) {
         super(id, false, false, levelColour);
         this.tileID = x + y * 32;
-        
     }
 
     public void update() {

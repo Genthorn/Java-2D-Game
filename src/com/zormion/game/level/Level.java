@@ -32,8 +32,6 @@ public class Level {
     private List<Entity> entities = new ArrayList<Entity>();
     private String levelPath;
     
-    private BufferedImage image;
-
     public Level(String levelPath) {
         if (levelPath != null) {
             this.levelPath = levelPath;
@@ -48,27 +46,67 @@ public class Level {
 
     private void loadLevelFromFile() {
         try {
-            this.image = ImageIO.read(new File(this.levelPath));
-            this.width = this.image.getWidth();
-            this.height = this.image.getHeight();
-            tiles = new byte[width * height];
             this.loadTiles();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void loadTiles() {
-        int[] tileColours = this.image.getRGB(0, 0, width, height, null, 0, width);
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                tileCheck: for (Tile t : Tile.tiles) {
-                    if (t != null && t.getLevelColor() == tileColours[x + y * width]) {
-                        this.tiles[x + y * width] = t.getID();
-                        break tileCheck;
-                    }
-                }
+//        int[] tileColours = this.image.getRGB(0, 0, width, height, null, 0, width);
+//        for (int y = 0; y < height; y++) {
+//            for (int x = 0; x < width; x++) {
+//                tileCheck: for (Tile t : Tile.tiles) {
+//                    if (t != null && t.getLevelColor() == tileColours[x + y * width]) {
+//                        this.tiles[x + y * width] = t.getID();
+//                        break tileCheck;
+//                    }
+//                }
+//            }
+//        }
+    	
+    	try {
+            Scanner scanner = new Scanner(new File(levelPath));
+             
+            String find = scanner.nextLine();
+            int tempw = 1;
+            int temph = 1;
+            int currentTile;
+             
+            if(find.equals("<width>")) tempw = scanner.nextInt();
+                 
+            scanner.nextLine();
+            find = scanner.nextLine();
+             
+            if(find.equals("<height>")) temph = scanner.nextInt();
+                 
+            int w = width = tempw;
+            int h = height = temph;
+            
+            this.tiles = new byte[width * height];
+            
+            int[] tilesScanned = new int[tiles.length];
+            
+            for(int i = 0; i < w * h; i++) {
+                currentTile = scanner.nextInt();
+                tilesScanned[i] = currentTile;
             }
+            
+            for (int y = 0; y < height; y++) {
+            	for (int x = 0; x < width; x++) {
+            		for(Tile t : Tile.tiles) {
+            			if (t != null && t.getLevelColor() == tilesScanned[x + y * width]) {
+            				this.tiles[x + y * width] = t.getID();
+            			}
+            		}
+            	}
+            }
+    	
+            scanner.close();
+             
+        } catch(IOException ex) {
+            ex.printStackTrace();
+            System.err.println("Exception! Could not load level file!");
         }
     }
 
