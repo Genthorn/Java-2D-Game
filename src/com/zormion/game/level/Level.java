@@ -1,23 +1,10 @@
 package com.zormion.game.level;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
-
-import javax.imageio.ImageIO;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import com.zormion.game.entities.Entity;
 import com.zormion.game.entities.PlayerMP;
@@ -33,15 +20,9 @@ public class Level {
     private String levelPath;
     
     public Level(String levelPath) {
-        if (levelPath != null) {
-            this.levelPath = levelPath;
-            this.loadLevelFromFile();
-        } else {
-            this.width = 64;
-            this.height = 64;
-            tiles = new byte[width * height];
-            this.generateLevel();
-        }
+        this.levelPath = levelPath;
+        this.loadLevelFromFile();
+        
     }
 
     private void loadLevelFromFile() {
@@ -53,18 +34,6 @@ public class Level {
     }
 
     private void loadTiles() {
-//        int[] tileColours = this.image.getRGB(0, 0, width, height, null, 0, width);
-//        for (int y = 0; y < height; y++) {
-//            for (int x = 0; x < width; x++) {
-//                tileCheck: for (Tile t : Tile.tiles) {
-//                    if (t != null && t.getLevelColor() == tileColours[x + y * width]) {
-//                        this.tiles[x + y * width] = t.getID();
-//                        break tileCheck;
-//                    }
-//                }
-//            }
-//        }
-    	
     	try {
             Scanner scanner = new Scanner(new File(levelPath));
              
@@ -95,7 +64,7 @@ public class Level {
             for (int y = 0; y < height; y++) {
             	for (int x = 0; x < width; x++) {
             		for(Tile t : Tile.tiles) {
-            			if (t != null && t.getLevelColor() == tilesScanned[x + y * width]) {
+            			if (t != null && t.getLevelNumber() == tilesScanned[x + y * width]) {
             				this.tiles[x + y * width] = t.getID();
             			}
             		}
@@ -107,18 +76,6 @@ public class Level {
         } catch(IOException ex) {
             ex.printStackTrace();
             System.err.println("Exception! Could not load level file!");
-        }
-    }
-
-    public void generateLevel() {
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                if (x * y % 10 < 7) {
-                    tiles[x + y * width] = Tile.GRASS.getID();
-                } else {
-                    tiles[x + y * width] = Tile.STONE.getID();
-                }
-            }
         }
     }
 
@@ -204,6 +161,7 @@ public class Level {
     public Tile getTile(int x, int y) {
     	if (0 > x || x >= width || 0 > y || y >= height)
     		return Tile.VOID;
+    	
     	return Tile.tiles[tiles[x + y * width]];
     }
 }

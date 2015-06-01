@@ -7,8 +7,8 @@ public class BasicTile extends Tile {
 
     protected int tileID;
 
-    public BasicTile(int id, int x, int y, int levelColour) {
-        super(id, false, false, levelColour);
+    public BasicTile(int levelNumber, int x, int y) {
+        super(levelNumber, false, false);
         this.tileID = x + y * 32;
     }
 

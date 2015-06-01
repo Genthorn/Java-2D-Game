@@ -13,9 +13,9 @@ public class Player extends Mob {
     
     private int scale = 1;
     protected boolean isSwimming = false;
-    private int tickCount = 0;
+    private int updateCount = 0;
     private String username;
-
+    
     public Player(String username, Level level, int x, int y, Keyboard input) {
         super(level, "Player", x, y, 1);
         this.input = input;
@@ -49,13 +49,14 @@ public class Player extends Mob {
         } else {
             isMoving = false;
         }
-        if (level.getTile(this.x >> 3, this.y >> 3).getID() == 3) {
+        if (level.getTile(this.x >> 3, this.y >> 3).isLiquid()) {
             isSwimming = true;
         }
-        if (isSwimming && level.getTile(this.x >> 3, this.y >> 3).getID() != 3) {
+        if (isSwimming && level.getTile(this.x >> 3, this.y >> 3).isLiquid() == false) {
             isSwimming = false;
         }
-        tickCount++;
+        
+        updateCount++;
     }
 
     public void render(Screen screen) {

@@ -8,9 +8,7 @@ import java.awt.Image;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.io.File;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -66,7 +64,6 @@ public class Game extends Canvas implements Runnable {
   * ---------
   * -Do Player in Water Bobbing
   * -Save Player data on server
-  * -Parse Flare Map
   * -Randomize tile animation
   *
   */
@@ -82,8 +79,8 @@ public class Game extends Canvas implements Runnable {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.requestFocus();
 		frame.setIconImage(iconImage);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setUndecorated(true);
+		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//frame.setUndecorated(true);
 		frame.setLayout(new BorderLayout());
 		frame.add(this, BorderLayout.CENTER);
 		frame.pack();
@@ -98,7 +95,7 @@ public class Game extends Canvas implements Runnable {
         screen = new Screen(WIDTH, HEIGHT, new Spritesheet("res/spritesheet.png"));
         windowHandler = new WindowHandler(this);
         input = new Keyboard(this);
-        level = new Level("res/levels/level.txt");
+        level = new Level("res/levels/test.txt");
         player = new PlayerMP(JOptionPane.showInputDialog(this, "Please enter a username"), level, 100, 100, input, null, -1);
         level.addEntity(player);
         if (!isApplet) {
