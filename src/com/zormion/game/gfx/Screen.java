@@ -66,6 +66,14 @@ public class Screen {
         }
 	}
 	
+	public void renderRect(int color, int xPos, int yPos, int width, int height) {
+		for(int x = xPos; x < xPos + width; x++) {
+			for(int y = yPos; y < yPos + height; y++) {
+				pixels[x + y * this.width] = color;
+			}
+		}
+	}
+	
 	public void setOffset(int xOffset, int yOffset) {
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;

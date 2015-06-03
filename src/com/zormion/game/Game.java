@@ -2,6 +2,7 @@ package com.zormion.game;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -15,6 +16,7 @@ import javax.swing.JOptionPane;
 
 import com.zormion.game.entities.Player;
 import com.zormion.game.entities.PlayerMP;
+import com.zormion.game.gfx.Font;
 import com.zormion.game.gfx.Screen;
 import com.zormion.game.gfx.Spritesheet;
 import com.zormion.game.input.Keyboard;
@@ -95,7 +97,7 @@ public class Game extends Canvas implements Runnable {
         screen = new Screen(WIDTH, HEIGHT, new Spritesheet("res/spritesheet.png"));
         windowHandler = new WindowHandler(this);
         input = new Keyboard(this);
-        level = new Level("res/levels/test.txt");
+        level = new Level("res/levels/water1.txt");
         player = new PlayerMP(JOptionPane.showInputDialog(this, "Please enter a username"), level, 100, 100, input, null, -1);
         level.addEntity(player);
         if (!isApplet) {
@@ -185,27 +187,26 @@ public class Game extends Canvas implements Runnable {
 
     public void render() {
         BufferStrategy bs = getBufferStrategy();
-        if (bs == null) {
-            createBufferStrategy(3);
-            return;
-        }
-
+        if (bs == null) { createBufferStrategy(3); return; }
+        Graphics g = bs.getDrawGraphics();
+        
         int xOffset = player.x - (screen.width / 2);
         int yOffset = player.y - (screen.height / 2);
 
         level.renderTiles(screen, xOffset, yOffset);
         level.renderEntities(screen);
         
+        player.renderNotOnServer(screen);
+        
         for (int y = 0; y < screen.height; y++) {
             for (int x = 0; x < screen.width; x++) {
-                //int colourCode = screen.pixels[x + y * screen.width];
-                //if (colourCode < 255)
-                    pixels[x + y * WIDTH] = screen.pixels[x+y*screen.width];
+                pixels[x + y * WIDTH] = screen.pixels[x+y*screen.width];
             }
         }
 
-        Graphics g = bs.getDrawGraphics();
+        
         g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+        
         g.dispose();
         bs.show();
     }

@@ -1,6 +1,7 @@
 package com.zormion.game.entities;
 
 import com.zormion.game.Game;
+import com.zormion.game.containers.Inventory;
 import com.zormion.game.gfx.Font;
 import com.zormion.game.gfx.Screen;
 import com.zormion.game.input.Keyboard;
@@ -15,11 +16,13 @@ public class Player extends Mob {
     protected boolean isSwimming = false;
     private int updateCount = 0;
     private String username;
+    private Inventory inventory;
     
     public Player(String username, Level level, int x, int y, Keyboard input) {
         super(level, "Player", x, y, 1);
         this.input = input;
         this.username = username;
+        this.inventory = new Inventory();
     }
 
     public void update() {
@@ -55,6 +58,8 @@ public class Player extends Mob {
         if (isSwimming && level.getTile(this.x >> 3, this.y >> 3).isLiquid() == false) {
             isSwimming = false;
         }
+        
+        //inventory.update(input);
         
         updateCount++;
     }
@@ -93,8 +98,12 @@ public class Player extends Mob {
                     * 32, flipBottom, scale);
         }
         if (username != null) {
-            Font.render(username, screen, xOffset - ((username.length() - 1) / 2 * 8), yOffset - 10);
+            Font.render(username, screen, xOffset - ((username.length() - 1) / 2 * 8), yOffset - 10, 1);
         }
+    }
+    
+    public void renderNotOnServer(Screen screen) {
+    	inventory.render(screen);
     }
 
     public boolean hasCollided(int xa, int ya) {

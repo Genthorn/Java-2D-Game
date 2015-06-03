@@ -27,6 +27,10 @@ public class Keyboard implements KeyListener {
 			return this.isPressed;
 		}
 		
+		public boolean isReleased() {
+			return !this.isPressed;
+		}
+		
 		public int getNumTimesPressed() {
 			return numTimesPressed;
 		}
@@ -39,6 +43,7 @@ public class Keyboard implements KeyListener {
 	public Key left = new Key();
 	public Key right = new Key();
 	public Key escape = new Key();
+	public Key E = new Key();
 
 	public void keyPressed(KeyEvent e) {
 		toggleKey(e.getKeyCode(), true);
@@ -57,6 +62,7 @@ public class Keyboard implements KeyListener {
 		if(keyCode == KeyEvent.VK_S) down.toggle(isPressed);
 		if(keyCode == KeyEvent.VK_D) right.toggle(isPressed);
 		if(keyCode == KeyEvent.VK_ESCAPE) escape.toggle(isPressed);
+		if(keyCode == KeyEvent.VK_E) E.toggle(isPressed);
 	}
 
 }

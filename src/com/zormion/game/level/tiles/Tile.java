@@ -22,6 +22,14 @@ public abstract class Tile {
 	public static final Tile SAND_BUCKET_BLUE = new BasicSolidTile    (3,  2);
 	
 	public static final Tile WATER = new AnimatedTile(new int[][] { { 0, 4 }, { 1, 4 }, { 2, 4 }, { 1, 4 } }, 1000);
+	public static final Tile WATER_BORDER_GRASS_TOP_LEFT = new BasicTile(0,  5);
+	public static final Tile WATER_BORDER_GRASS_TOP_MIDDLE = new BasicTile(1,  5);
+	public static final Tile WATER_BORDER_GRASS_TOP_RIGHT = new BasicTile(2, 5);
+	public static final Tile WATER_BORDER_GRASS_MIDDLE_LEFT = new BasicTile(0, 6);
+	public static final Tile WATER_BORDER_GRASS_MIDDLE_RIGHT = new BasicTile(2, 6);
+	public static final Tile WATER_BORDER_GRASS_BOTTOM_LEFT = new BasicTile(0, 7);
+	public static final Tile WATER_BORDER_GRASS_BOTTOM_MIDDLE = new BasicTile(1, 7);
+	public static final Tile WATER_BORDER_GRASS_BOTTOM_RIGHT = new BasicTile(2, 7);
 	
 	protected byte tileID;
     protected boolean solid;
