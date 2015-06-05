@@ -81,8 +81,8 @@ public class Game extends Canvas implements Runnable {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.requestFocus();
 		frame.setIconImage(iconImage);
-		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		//frame.setUndecorated(true);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setUndecorated(true);
 		frame.setLayout(new BorderLayout());
 		frame.add(this, BorderLayout.CENTER);
 		frame.pack();
