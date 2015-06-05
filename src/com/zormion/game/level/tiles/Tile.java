@@ -31,6 +31,11 @@ public abstract class Tile {
 	public static final Tile WATER_BORDER_GRASS_BOTTOM_MIDDLE = new BasicTile(1, 7);
 	public static final Tile WATER_BORDER_GRASS_BOTTOM_RIGHT = new BasicTile(2, 7);
 	
+	public static final Tile GRASS_WATER_DIAGONAL_BOTTOM_RIGHT = new BasicTile(3, 5);
+	public static final Tile GRASS_WATER_DIAGONAL_BOTTOM_LEFT = new BasicTile(4, 5);
+	public static final Tile GRASS_WATER_DIAGONAL_TOP_RIGHT = new BasicTile(3, 6);
+	public static final Tile GRASS_WATER_DIAGONAL_TOP_LEFT = new BasicTile(4, 6);
+	
 	protected byte tileID;
     protected boolean solid;
     protected boolean emitter;

@@ -32,7 +32,7 @@ public class Game extends Canvas implements Runnable {
     public static final int WIDTH = 320;
     public static final int HEIGHT = WIDTH / 16 * 9;
     public static final int SCALE = 3;
-    public static final String NAME = "Game";
+    public static final String NAME = "The Stoopide Game: The Rise of Kim Heng";
     public static final Dimension DIMENSIONS = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
     public static Game game;
 
@@ -97,7 +97,7 @@ public class Game extends Canvas implements Runnable {
         screen = new Screen(WIDTH, HEIGHT, new Spritesheet("res/spritesheet.png"));
         windowHandler = new WindowHandler(this);
         input = new Keyboard(this);
-        level = new Level("res/levels/water1.txt");
+        level = new Level("res/levels/diagonal.txt");
         player = new PlayerMP(JOptionPane.showInputDialog(this, "Please enter a username"), level, 100, 100, input, null, -1);
         level.addEntity(player);
         if (!isApplet) {
@@ -120,6 +120,7 @@ public class Game extends Canvas implements Runnable {
                 socketServer.start();
             }
             
+            //EVAN'S IP: 192.168.100.173
             socketClient = new GameClient(this, "localhost");
             socketClient.start();
         }
