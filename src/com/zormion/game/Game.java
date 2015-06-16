@@ -120,8 +120,7 @@ public class Game extends Canvas implements Runnable {
                 socketServer.start();
             }
             
-            //EVAN'S IP: 192.168.100.173
-            socketClient = new GameClient(this, "localhost");
+            socketClient = new GameClient(this, "192.168.0.15");
             socketClient.start();
         }
     }
