@@ -32,7 +32,7 @@ public class Game extends Canvas implements Runnable {
     public static final int WIDTH = 320;
     public static final int HEIGHT = WIDTH / 16 * 9;
     public static final int SCALE = 3;
-    public static final String NAME = "The Stoopide Game: The Rise of Kim Heng";
+    public static final String NAME = "The Stoopide Game: The Rise of Kim Heng: The Movie: The Game";
     public static final Dimension DIMENSIONS = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
     public static Game game;
 
@@ -82,7 +82,7 @@ public class Game extends Canvas implements Runnable {
 		frame.requestFocus();
 		frame.setIconImage(iconImage);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setUndecorated(true);
+		//frame.setUndecorated(true);
 		frame.setLayout(new BorderLayout());
 		frame.add(this, BorderLayout.CENTER);
 		frame.pack();
@@ -120,7 +120,7 @@ public class Game extends Canvas implements Runnable {
                 socketServer.start();
             }
             
-            socketClient = new GameClient(this, "192.168.0.15");
+            socketClient = new GameClient(this, "localhost");
             socketClient.start();
         }
     }
