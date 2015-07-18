@@ -65,7 +65,7 @@ public class Player extends Mob {
     }
 
     public void render(Screen screen) {
-        int xTile = 0;
+    	int xTile = 0;
         int yTile = 28;
         int walkingSpeed = 4;
         int flipTop = (numSteps >> walkingSpeed) & 1;
@@ -76,6 +76,7 @@ public class Player extends Mob {
         } else if (movingDir > 1) {
             xTile += 4 + ((numSteps >> walkingSpeed) & 1) * 2;
             flipTop = (movingDir - 1) % 2;
+            flipBottom = (movingDir - 1) % 2;
         }
 
         int modifier = 8 * scale;
@@ -83,6 +84,13 @@ public class Player extends Mob {
         int yOffset = y - modifier / 2 - 4;
         if (isSwimming) {
             yOffset += 4;
+            if (updateCount % 60 < 15) {
+            } else if (15 <= updateCount % 60 && updateCount % 60 < 30) {
+                yOffset -= 1;
+            } else if (30 <= updateCount % 60 && updateCount % 60 < 45) {
+            } else {
+                yOffset -= 1;
+            }
             
             screen.render(xOffset, yOffset + 3, 0 + 27 * 32, 0x00, 1);
             screen.render(xOffset + 8, yOffset + 3, 0 + 27 * 32, 0x01, 1);

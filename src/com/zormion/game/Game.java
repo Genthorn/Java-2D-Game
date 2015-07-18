@@ -29,10 +29,10 @@ public class Game extends Canvas implements Runnable {
 
     private static final long serialVersionUID = 1L;
 
-    public static final int WIDTH = 320;
+    public static final int WIDTH = 300;
     public static final int HEIGHT = WIDTH / 16 * 9;
     public static final int SCALE = 3;
-    public static final String NAME = "The Stoopide Game: The Rise of Kim Heng: The Movie: The Game";
+    public static final String NAME = "Game";
     public static final Dimension DIMENSIONS = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
     public static Game game;
 
@@ -81,8 +81,6 @@ public class Game extends Canvas implements Runnable {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.requestFocus();
 		frame.setIconImage(iconImage);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		//frame.setUndecorated(true);
 		frame.setLayout(new BorderLayout());
 		frame.add(this, BorderLayout.CENTER);
 		frame.pack();
@@ -97,7 +95,7 @@ public class Game extends Canvas implements Runnable {
         screen = new Screen(WIDTH, HEIGHT, new Spritesheet("res/spritesheet.png"));
         windowHandler = new WindowHandler(this);
         input = new Keyboard(this);
-        level = new Level("res/levels/diagonal.txt");
+        level = new Level("res/levels/testmap.txt");
         player = new PlayerMP(JOptionPane.showInputDialog(this, "Please enter a username"), level, 100, 100, input, null, -1);
         level.addEntity(player);
         if (!isApplet) {
@@ -120,7 +118,7 @@ public class Game extends Canvas implements Runnable {
                 socketServer.start();
             }
             
-            socketClient = new GameClient(this, "localhost");
+            socketClient = new GameClient(this, "25.133.252.115");
             socketClient.start();
         }
     }
@@ -171,7 +169,7 @@ public class Game extends Canvas implements Runnable {
             if (System.currentTimeMillis() - lastTimer >= 1000) {
                 lastTimer += 1000;
                 debug(DebugLevel.INFO, updates + " ticks, " + frames + " frames");
-                
+                frame.setTitle(NAME + " | FPS: " + frames);
                 frames = 0;
                 updates = 0;
             }
