@@ -2,7 +2,6 @@ package com.zormion.game;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -14,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.zormion.game.audio.Sound;
 import com.zormion.game.entities.Player;
 import com.zormion.game.entities.PlayerMP;
 import com.zormion.game.gfx.Font;
@@ -29,7 +29,7 @@ public class Game extends Canvas implements Runnable {
 
     private static final long serialVersionUID = 1L;
 
-    public static final int WIDTH = 300;
+    public static final int WIDTH = 345;
     public static final int HEIGHT = WIDTH / 16 * 9;
     public static final int SCALE = 3;
     public static final String NAME = "Game";
@@ -52,6 +52,8 @@ public class Game extends Canvas implements Runnable {
     public WindowHandler windowHandler;
     public Level level;
     public Player player;
+    
+    private Sound sound;
 
     public GameClient socketClient;
     public GameServer socketServer;
@@ -98,6 +100,10 @@ public class Game extends Canvas implements Runnable {
         level = new Level("res/levels/testmap.txt");
         player = new PlayerMP(JOptionPane.showInputDialog(this, "Please enter a username"), level, 100, 100, input, null, -1);
         level.addEntity(player);
+        
+        sound = new Sound("res/bgmusic.wav");
+        sound.play();
+        
         if (!isApplet) {
             Packet00Login loginPacket = new Packet00Login(player.getUsername(), player.x, player.y);
             if (socketServer != null) {
@@ -118,7 +124,7 @@ public class Game extends Canvas implements Runnable {
                 socketServer.start();
             }
             
-            socketClient = new GameClient(this, "25.133.252.115");
+            socketClient = new GameClient(this, "localhost");
             socketClient.start();
         }
     }

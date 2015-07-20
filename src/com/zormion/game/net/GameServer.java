@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.zormion.game.Game;
+import com.zormion.game.entities.Mob;
 import com.zormion.game.entities.PlayerMP;
 import com.zormion.game.net.packets.Packet;
 import com.zormion.game.net.packets.Packet.PacketTypes;
@@ -21,7 +22,7 @@ public class GameServer extends Thread {
     private DatagramSocket socket;
     private Game game;
     private List<PlayerMP> connectedPlayers = new ArrayList<PlayerMP>();
-
+    
     public GameServer(Game game) {
         this.game = game;
         try {
