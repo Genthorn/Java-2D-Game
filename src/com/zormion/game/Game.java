@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -16,7 +15,6 @@ import javax.swing.JOptionPane;
 import com.zormion.game.audio.Sound;
 import com.zormion.game.entities.Player;
 import com.zormion.game.entities.PlayerMP;
-import com.zormion.game.gfx.Font;
 import com.zormion.game.gfx.Screen;
 import com.zormion.game.gfx.Spritesheet;
 import com.zormion.game.input.Keyboard;
@@ -24,6 +22,7 @@ import com.zormion.game.level.Level;
 import com.zormion.game.net.GameClient;
 import com.zormion.game.net.GameServer;
 import com.zormion.game.net.packets.Packet00Login;
+import com.zormion.game.gfx.Image;
 
 public class Game extends Canvas implements Runnable {
 
@@ -94,7 +93,7 @@ public class Game extends Canvas implements Runnable {
     public void init() {
         game = this;
 
-        screen = new Screen(WIDTH, HEIGHT, new Spritesheet("res/spritesheet.png"));
+        screen = new Screen(WIDTH, HEIGHT, SCALE, new Spritesheet("res/spritesheet.png"));
         windowHandler = new WindowHandler(this);
         input = new Keyboard(this);
         level = new Level("res/levels/testmap.txt");
@@ -202,9 +201,11 @@ public class Game extends Canvas implements Runnable {
         
         player.renderNotOnServer(screen);
         
+        screen.renderHighResolution(new Image(), g, xPos, yPos);e
+        
         for (int y = 0; y < screen.height; y++) {
             for (int x = 0; x < screen.width; x++) {
-                pixels[x + y * WIDTH] = screen.pixels[x+y*screen.width];
+                pixels[x + y * WIDTH] = screen.pixelsSmall[x+y*screen.width];
             }
         }
 

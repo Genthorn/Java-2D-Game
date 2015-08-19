@@ -1,5 +1,12 @@
 package com.zormion.game.gfx;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 public class Screen {
 
 	public static final int MAP_WIDTH = 64;
@@ -8,7 +15,8 @@ public class Screen {
 	public static final byte BIT_MIRROR_X = 0x01;
 	public static final byte BIT_MIRROR_Y = 0x02;
 	
-	public int[] pixels;
+	public int[] pixelsSmall;
+	public int[] pixelsBig;
 	
 	public int xOffset = 0;
 	public int yOffset = 0;
@@ -18,13 +26,13 @@ public class Screen {
 
 	public Spritesheet sheet;
 
-	public Screen(int width, int height, Spritesheet sheet) {
+	public Screen(int width, int height, int scale, Spritesheet sheet) {
 		this.width = width;
 		this.height = height;
 		this.sheet = sheet;
 
-		pixels = new int[width * height];
-
+		pixelsSmall = new int[width * height];
+		pixelsBig = new int[(width * scale) * (height * scale)];
 	}
 
 	public void render(int xPos, int yPos, int tile, int mirrorDir, int scale) {
@@ -58,7 +66,7 @@ public class Screen {
                         for (int xScale = 0; xScale < scale; xScale++) {
                             if (xPixel + xScale < 0 || xPixel + xScale >= width)
                                 continue;
-                            if(col != 0xffff00ff) pixels[(xPixel + xScale) + (yPixel + yScale) * width] = col;
+                            if(col != 0xffff00ff) pixelsSmall[(xPixel + xScale) + (yPixel + yScale) * width] = col;
                         }
                     }
                 }
@@ -66,12 +74,8 @@ public class Screen {
         }
 	}
 	
-	public void renderRect(int color, int xPos, int yPos, int width, int height) {
-		for(int x = xPos; x < xPos + width; x++) {
-			for(int y = yPos; y < yPos + height; y++) {
-				pixels[x + y * this.width] = color;
-			}
-		}
+	public void renderHighResolution(Image image, Graphics g, int xPos, int yPos) {
+		g.drawImage(image.getImage(), xPos, yPos, null);
 	}
 	
 	public void setOffset(int xOffset, int yOffset) {
