@@ -17,7 +17,7 @@ public class Inventory {
 	}
 	
 	public void render(Screen screen) {
-		if(isOpen()) screen.renderRect(0xff6f6f6f, (screen.width / 2) - 125, (screen.height / 2) - 75, 250, 150);
+		//if(isOpen()) screen.renderRect(0xff6f6f6f, (screen.width / 2) - 125, (screen.height / 2) - 75, 250, 150);
 	}
 	
 	public boolean isOpen() {
