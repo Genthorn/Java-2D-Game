@@ -6,13 +6,13 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Image {
+public class Texture {
 	private BufferedImage image;
 	private int width, height;
 	private String path;
 	private int[] pixels;
 	
-	public Image(String path) {
+	public Texture(String path) {
 		try {
 			this.image = ImageIO.read(new File("strawberry.jpg"));
 		} catch (IOException e) {
