@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -17,12 +18,12 @@ import com.zormion.game.entities.Player;
 import com.zormion.game.entities.PlayerMP;
 import com.zormion.game.gfx.Screen;
 import com.zormion.game.gfx.Spritesheet;
+import com.zormion.game.gfx.Texture;
 import com.zormion.game.input.Keyboard;
 import com.zormion.game.level.Level;
 import com.zormion.game.net.GameClient;
 import com.zormion.game.net.GameServer;
 import com.zormion.game.net.packets.Packet00Login;
-import com.zormion.game.gfx.Image;
 
 public class Game extends Canvas implements Runnable {
 
@@ -201,16 +202,15 @@ public class Game extends Canvas implements Runnable {
         
         player.renderNotOnServer(screen);
         
-        screen.renderHighResolution(new Image(), g, xPos, yPos);e
-        
         for (int y = 0; y < screen.height; y++) {
-            for (int x = 0; x < screen.width; x++) {
-                pixels[x + y * WIDTH] = screen.pixelsSmall[x+y*screen.width];
+        	for (int x = 0; x < screen.width; x++) {
+            	pixels[x + y * WIDTH] = screen.pixelsSmall[x+y*screen.width];
             }
         }
 
         
         g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+        
         
         g.dispose();
         bs.show();

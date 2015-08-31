@@ -14,7 +14,7 @@ public class Texture {
 	
 	public Texture(String path) {
 		try {
-			this.image = ImageIO.read(new File("strawberry.jpg"));
+			this.image = ImageIO.read(new File(path));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

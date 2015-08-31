@@ -74,7 +74,7 @@ public class Screen {
         }
 	}
 	
-	public void renderHighResolution(Image image, Graphics g, int xPos, int yPos) {
+	public void renderHighResolution(Texture image, Graphics g, int xPos, int yPos) {
 		g.drawImage(image.getImage(), xPos, yPos, null);
 	}
 	
