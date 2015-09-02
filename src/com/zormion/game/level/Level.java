@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.zormion.game.entities.Entity;
+import com.zormion.game.entities.Monster;
 import com.zormion.game.entities.PlayerMP;
 import com.zormion.game.gfx.Screen;
 import com.zormion.game.level.tiles.Tile;
